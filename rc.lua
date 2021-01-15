@@ -1,13 +1,13 @@
 --[[
-  ____ _____ 
+  ____ _____
  |  _ \_   _|  Derek Taylor (DistroTube)
  | | | || |    http://www.youtube.com/c/DistroTube
- | |_| || |    http://www.gitlab.com/dwt1/ 
- |____/ |_| 
- 
+ | |_| || |    http://www.gitlab.com/dwt1/
+ |____/ |_|
+
  My awesome window manager configuration. Provided here for those that want to examine or use
  my config in part or in whole. Take what works for you; leave the rest!
- 
+
 --]]
 
 -- {{{  libraries
@@ -104,14 +104,14 @@ local modkey1      = "Control"
 
 -- personal variables
 --change these variables if you want
-local browser           = "firefox"
+local browser           = "brave"
 local editor            = os.getenv("EDITOR") or "vim"
-local editorgui         = "geany"
-local filemanager       = "thunar"
+local editorgui         = "atom"
+local filemanager       = "nautilus"
 local mailclient        = "thunderbird"
 local mediaplayer       = "vlc"
 local scrlocker         = "slimlock"
-local terminal          = "st"
+local terminal          = "termite"
 local virtualmachine    = "virtualbox"
 
 -- awesome variables
@@ -286,53 +286,24 @@ globalkeys = my_table.join(
         {description = "surfraw web search" , group = "dmenu scripts" }),
     awful.key({ altkey, "Control"  }, "t", function () awful.util.spawn( "./.dmenu/dmenu-trading.sh" ) end,
         {description = "trading programs" , group = "dmenu scripts" }),
-        
+
     -- My applications (Super+Alt+Key)
-    awful.key({ modkey, altkey }, "a", function () awful.util.spawn( terminal.." -e ncpamixer" ) end,
-        {description = "ncpamixer" , group = "terminal apps" }),
-    awful.key({ modkey }, "b", function () awful.util.spawn( "google-chrome-stable" ) end,
-        {description = "Google Chrome" , group = "gui apps" }),
-    awful.key({ modkey }, "y", function () awful.util.spawn( "google-chrome-stable https://youtube.com/" ) end,
-        {description = "Youtube Chrome" , group = "gui apps" }),
-    awful.key({ modkey }, "w", function () awful.util.spawn( "google-chrome-stable https://web.whatsapp.com/" ) end,
-        {description = "WhatsApp Chrome" , group = "gui apps" }),    
+    awful.key({ modkey }, "b", function () awful.util.spawn( "brave" ) end,
+        {description = "Brave Browser" , group = "gui apps" }),
+    awful.key({ modkey }, "y", function () awful.util.spawn( "brave https://youtube.com/" ) end,
+        {description = "Youtube Brave" , group = "gui apps" }),
+    awful.key({ modkey }, "w", function () awful.util.spawn( "brave https://web.whatsapp.com/" ) end,
+        {description = "WhatsApp Brave" , group = "gui apps" }),
     awful.key({ modkey }, "a", function () awful.util.spawn( "atom" ) end,
-        {description = "Atom Code Editor" , group = "gui apps" }),    
-    awful.key({ modkey }, "m", function () awful.util.spawn( "google-chrome-stable https://mail.zoho.com/" ) end,
-        {description = "Vegaz Mail Chrome" , group = "gui apps" }),    
-    awful.key({ modkey, altkey  }, "c", function () awful.util.spawn( terminal.." -e cmus" ) end,
-        {description = "cmus" , group = "terminal apps" }),
-    awful.key({ modkey, altkey }, "e", function () awful.util.spawn( terminal.." -e neomutt" ) end,
-        {description = "neomutt email" , group = "terminal apps" }),
-    awful.key({ modkey, altkey  }, "f", function () awful.util.spawn( terminal.." -e sh ./.config/vifm/scripts/vifmrun" ) end,
-        {description = "vifm" , group = "terminal apps" }),
-    awful.key({ modkey, altkey  }, "i", function () awful.util.spawn( terminal.." -e irssi" ) end,
-        {description = "irssi" , group = "terminal apps" }),
-    awful.key({ modkey, altkey  }, "j", function () awful.util.spawn( terminal.." -e joplin" ) end,
-        {description = "joplin" , group = "terminal apps" }),
-    awful.key({ modkey, altkey }, "l", function () awful.util.spawn( terminal.." -e lynx --cfg=~/.lynx/lynx.cfg --lss=~/.lynx/lynx.lss -vikeys gopher://distro.tube" ) end,
-        {description = "lynx cli browser" , group = "terminal apps" }),
-    awful.key({ modkey, altkey }, "m", function () awful.util.spawn( terminal.." -e toot curses" ) end,
-        {description = "toot curses" , group = "terminal apps" }),
-    awful.key({ modkey, altkey }, "n", function () awful.util.spawn( terminal.." -e newsboat" ) end,
-        {description = "newsboat" , group = "terminal apps" }),
-    awful.key({ modkey, altkey  }, "p", function () awful.util.spawn( terminal.." -e pianobar" ) end,
-        {description = "pianobar" , group = "terminal apps" }),
-    awful.key({ modkey, altkey }, "r", function () awful.util.spawn( terminal.." -e rtv" ) end,
-        {description = "rtv" , group = "terminal apps" }),
-    awful.key({ modkey, altkey  }, "w", function () awful.util.spawn( terminal.." -e wopr report.xml" ) end,
-        {description = "wopr report.xml" , group = "terminal apps" }),
-    awful.key({ modkey, altkey  }, "y", function () awful.util.spawn( terminal.." -e youtube-viewer" ) end,
-        {description = "youtube-viewer" , group = "terminal apps" }),
+        {description = "Atom Code Editor" , group = "gui apps" }),
 
     awful.key({ modkey, altkey }, "s", function () awful.util.spawn( "spotify" ) end,
         {description = "Spotify" , group = "gui apps" }),
 
-    awful.key({ modkey }, "e", function () awful.util.spawn( "thunar" ) end,
-        {description = "Thunar File Manager" , group = "gui apps" }),
+    awful.key({ modkey }, "e", function () awful.util.spawn( "nautilus" ) end,
+        {description = "Nautilus File Manager" , group = "gui apps" }),
 
-    awful.key({ modkey }, "Return", function () awful.util.spawn( "terminator" ) end,
-        {description = "Terminator" , group = "gui apps" }),
+  
 
     -- screenshots
     awful.key({ }, "Print", function () awful.util.spawn("scrot 'ArcoLinuxD-%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f $$(xdg-user-dir PICTURES)'") end,
@@ -387,6 +358,10 @@ globalkeys = my_table.join(
         end,
         {description = "focus previous by index", group = "client"}
     ),
+
+
+
+
 
     -- By direction client focus
     awful.key({ modkey }, "j",
@@ -914,5 +889,8 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 -- Autostart applications
 awful.spawn.with_shell("~/.config/awesome/autostart.sh")
-awful.spawn.with_shell("compton --config  $HOME/.config/compton/compton.conf")
-awful.spawn.with_shell("nvidia-settings --assign CurrentMetaMode='nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }'")
+awful.spawn.with_shell("picom --experimental-backend")
+awful.spawn.with_shell("picom-trans")
+
+
+-- awful.spawn.with_shell("nvidia-settings --assign CurrentMetaMode='nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }'")

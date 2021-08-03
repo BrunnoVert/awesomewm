@@ -111,7 +111,7 @@ local filemanager       = "nautilus"
 local mailclient        = "thunderbird"
 local mediaplayer       = "vlc"
 local scrlocker         = "slimlock"
-local terminal          = "termite"
+local terminal          = "terminator"
 local virtualmachine    = "virtualbox"
 
 -- awesome variables
@@ -268,9 +268,9 @@ globalkeys = my_table.join(
 
     -- {{{ Personal keybindings
     -- dmenu
-    awful.key({ modkey, "Shift" }, "Return",
+    awful.key({ modkey }, "o",
     function ()
-        awful.spawn(string.format("dmenu_run -i  -nb '#292d3e' -nf '#bbc5ff' -sb '#82AAFF' -sf '#292d3e' -fn 'Mononoki Nerd Font:bold:pixelsize=14'",
+        awful.spawn(string.format("rofi -no-lazy-grab -show drun -modi run,drun,window -theme /home/vert/.config/rofi/launcher/style -drun-icon-theme \"candy-icons\"",
         beautiful.bg_normal, beautiful.fg_normal, beautiful.bg_focus, beautiful.fg_focus))
 	end,
     {description = "show dmenu", group = "hotkeys"}),
@@ -288,8 +288,6 @@ globalkeys = my_table.join(
         {description = "trading programs" , group = "dmenu scripts" }),
 
     -- My applications (Super+Alt+Key)
-    awful.key({ modkey }, "b", function () awful.util.spawn( "brave" ) end,
-        {description = "Brave Browser" , group = "gui apps" }),
     awful.key({ modkey }, "y", function () awful.util.spawn( "brave https://youtube.com/" ) end,
         {description = "Youtube Brave" , group = "gui apps" }),
     awful.key({ modkey }, "w", function () awful.util.spawn( "brave https://web.whatsapp.com/" ) end,
@@ -308,7 +306,7 @@ globalkeys = my_table.join(
     -- screenshots
     awful.key({ }, "Print", function () awful.util.spawn("scrot 'ArcoLinuxD-%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f $$(xdg-user-dir PICTURES)'") end,
         {description = "Scrot", group = "screenshots"}),
-    awful.key({ modkey1           }, "Print", function () awful.util.spawn( "xfce4-screenshooter" ) end,
+    awful.key({ modkey, "Shift" }, "p", function () awful.util.spawn( "xfce4-screenshooter" ) end,
         {description = "Xfce screenshot", group = "screenshots"}),
     -- Personal keybindings}}}
 
@@ -590,7 +588,7 @@ clientkeys = my_table.join(
             c:raise()
         end,
         {description = "toggle fullscreen", group = "client"}),
-    awful.key({ modkey }, "x",      function (c) c:kill()                         end,
+    awful.key({ modkey, "Shift" }, "c",      function (c) c:kill()                         end,
               {description = "close", group = "hotkeys"}),
     awful.key({ modkey, "Shift" }, "space",  awful.client.floating.toggle                     ,
               {description = "toggle floating", group = "client"}),
@@ -760,6 +758,16 @@ awful.rules.rules = {
     { rule = { class = "Xfce4-settings-manager" },
           properties = { floating = false } },
 
+{ rule = { class = "Firefox" },
+  properties = { opacity = 1, maximized = false, floating = false } },
+
+  { rule = { class = "Slack" },
+  properties = { floating = false } },
+
+
+
+
+
 
 
     -- Floating clients.
@@ -893,4 +901,3 @@ awful.spawn.with_shell("picom --experimental-backend")
 awful.spawn.with_shell("picom-trans")
 
 
--- awful.spawn.with_shell("nvidia-settings --assign CurrentMetaMode='nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }'")
